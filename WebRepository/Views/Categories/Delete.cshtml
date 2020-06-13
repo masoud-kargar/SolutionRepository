@@ -1,0 +1,44 @@
+﻿@model Domain.Category
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>آیا از حذف این دسته بندی اطمینان دارید ؟</h3>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Icon)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Icon)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Parent)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Parent.Name)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        @if (Model.ParentId == null) {
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="حذف" class="btn btn-outline-danger" />
+        } else {
+            <h3>
+                ! نمیتوانید دسته بندی اصلی که دارای زیر دسته میباشد را حذف کنید !
+            </h3>
+        }
+        <a class="btn btn-outline-dark" asp-action="Index">برگشت</a>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

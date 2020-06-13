@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Domain.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="viewAll">
+    @await Html.PartialAsync("_ViewAll", Model)
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

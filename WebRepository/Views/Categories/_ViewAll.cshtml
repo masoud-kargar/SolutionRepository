@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Domain.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+<table class="table table-hover table-responsive-lg text-center">
+    <thead>
+        <tr>
+            <th>
+                آیدی
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Icon)
+            </th>
+            <th>
+                <a onclick="showInPopup('@Url.Action("CreateSub","Categories",null,Context.Request.Scheme)','دسته بندی جدید')" class="btn font-weight-bold   btn-outline-success">ایجاد منوی اصلی</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Icon)
+                </td>
+                <td>
+                    <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id">ویرایش</a>
+                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">جزئیات</a>
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                </h5>
+                <button type="button" class="close float-left" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
