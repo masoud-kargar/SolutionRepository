@@ -34,7 +34,9 @@ namespace WebRepository {
             app.UseAuthorization();
 
             //Areas
+
             app.UseEndpoints(endpoints => { endpoints.MapControllerRoute(name: "SiteSettingArea", pattern: "{area:exists}/{controller=SiteSetting}/{action=Index}/{id?}"); });
+            app.UseEndpoints(endpoints => { endpoints.MapControllerRoute(name: "SiteSettingArea", pattern: "{area:exists}/{controller=Role}/{action=Index}/{id?}"); });
             app.UseEndpoints(endpoints => { endpoints.MapControllerRoute(name: "IdentityArea", pattern: "{area:exists}/{controller=ManageRole}/{action=Index}/{id?}"); });
             app.UseEndpoints(endpoints => { endpoints.MapControllerRoute(name: "IdentityArea", pattern: "{area:exists}/{controller=ManageUser}/{action=Index}/{id?}"); });
             app.UseEndpoints(endpoints => { endpoints.MapControllerRoute(name: "CategoryArea", pattern: "{area:exists}/{controller=Categories}/{action=Index}/{id?}"); });

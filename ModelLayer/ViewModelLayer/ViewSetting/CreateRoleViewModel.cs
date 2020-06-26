@@ -10,6 +10,9 @@ namespace IdentitySample.ViewModels.Role {
         public CreateRoleViewModel() {
             ActionAndControllerNames = new List<ActionAndControllerName>();
         }
+        public CreateRoleViewModel(IList<ActionAndControllerName> action ) {
+            ActionAndControllerNames = action;
+        }
 
         [Required()]
         [Display(Name = "نام مقام")]

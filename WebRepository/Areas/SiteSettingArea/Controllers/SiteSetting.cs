@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using ModelLayer;
 
 namespace WebRepository.Areas.SiteSettingArea.Controllers {
-    public class SiteSettingController : Controller {
+    [Area("SiteSettingArea")]
+    public class SiteSetting : Controller {
 
         private readonly AddService _Service;
 
-        public SiteSettingController(AddService service) {
+        public SiteSetting(AddService service) {
             _Service = service;
         }
 

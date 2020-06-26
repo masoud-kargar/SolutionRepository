@@ -42,21 +42,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (User.IsInRole("Owner") || User.IsInRole("Admin") && User.HasClaim(ClaimTypeStpre.CategoryList, true.ToString())) {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="CategoryArea" asp-controller="Categories" asp-action="SubIndex">دسته بندی</a>
-                            </li>
-                        }
-                        @if (User.IsInRole("Owner") || User.IsInRole("Admin") && User.HasClaim(ClaimTypeStpre.UserList, true.ToString())) {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="IdentityArea" asp-controller="ManageUser" asp-action="Index">مدریت کاربران</a>
-                            </li>
-                        }
-                        @if ((await AuthorizationService.AuthorizeAsync(User, "ClaimsAdmin")).Succeeded) {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="IdentityArea" asp-controller="ManageRole" asp-action="Index">مدریت رول ها</a>
-                            </li>
-                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="CategoryArea" asp-controller="Categories" asp-action="SubIndex">دسته بندی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="IdentityArea" asp-controller="ManageUser" asp-action="Index">مدریت کاربران</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="IdentityArea" asp-controller="ManageRole" asp-action="Index">مدریت رول ها</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="SiteSettingArea" asp-controller="Role" asp-action="Index">مدریت</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="SiteSettingArea" asp-controller="SiteSetting" asp-action="Index">مدریت</a>
+                        </li>
                     </ul>
                 </div>
             </div>
