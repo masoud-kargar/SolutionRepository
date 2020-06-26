@@ -20,7 +20,6 @@ namespace AllServises.Add {
         private readonly IMemoryCache _MemoryCache;
         private readonly IUtilities _Utilities;
         private readonly RoleManager<IdentityRole> _RoleManager;
-
         public AddService(
             IUnitOfWork<Setting> getWork,
             IMemoryCache memoryCache,
@@ -34,11 +33,11 @@ namespace AllServises.Add {
         public async Task<IList<Setting>> GetSiteSetting() {
             return await _GetWork.Repository.All();
         }
-        public RoleValidationGuidViewModel GetRoleValidationGuid() {
+        public object GetRoleValidationGuid() {
             var model = new RoleValidationGuidViewModel(_GetWork.Repository.where(t => t.Key == "RoleValidationGuid").FirstOrDefault()?.Value, _GetWork.Repository.where(t => t.Key == "RoleValidationGuid").FirstOrDefault()?.LastTimeChanged);
             return model;
         }
-        public RoleValidationGuidViewModel GetRoleValidationGuid(RoleValidationGuidViewModel viewModel) {
+        public object GetRoleValidationGuid(RoleValidationGuidViewModel viewModel) {
             if (_GetWork.Repository.where(t => t.Key == "RoleValidationGuid").FirstOrDefault() == null) {
                 _GetWork.Repository.Add(new Setting() {
                     Key = "RoleValidationGuid",
@@ -61,7 +60,7 @@ namespace AllServises.Add {
             foreach (var role in allRole) model.Add(new RoleIndexViewModel(role.Name, role.Id));
             return model;
         }
-        public CreateRoleViewModel GetCreatRole() {
+        public object GetCreatRole() {
             var allMvcNames = _MemoryCache.GetOrCreate("ActionAndControllerNamesList", p => {
                 p.AbsoluteExpiration = DateTimeOffset.FromUnixTimeMilliseconds(86400000);
                 return _Utilities.ActionAndControllerNamesList();
@@ -69,7 +68,7 @@ namespace AllServises.Add {
             var model = new CreateRoleViewModel(allMvcNames);
             return model;
         }
-        public async Task<CreateRoleViewModel> GetCreatRole(CreateRoleViewModel viewModel) {
+        public async Task<object> GetCreatRole(CreateRoleViewModel viewModel) {
             var role = new IdentityRole(viewModel.RoleName);
             var result = await _RoleManager.CreateAsync(role);
             if (result.Succeeded) {

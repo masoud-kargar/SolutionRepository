@@ -6,7 +6,7 @@
 }
 
 <h1>CreateRole</h1>
-<form asp-controller="Role" asp-action="CreateRole" method="post">
+<form asp-area="SiteSettingArea" asp-controller="Role" asp-action="CreateRole" method="post">
     <div asp-validation-summary="ModelOnly"></div>
     <br />
     <input asp-for="RoleName" />
