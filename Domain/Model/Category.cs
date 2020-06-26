@@ -19,9 +19,9 @@ namespace Domain {
         public string Icon { get; set; }
 
         public virtual Category Parent { get; set; }
-        public Category() {
+        //public Category() {
 
-        }
+        //}
         //Navigation Property 
         public virtual List<BlogNew> BlogNews { get; set; }
     }

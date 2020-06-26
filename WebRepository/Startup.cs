@@ -13,9 +13,11 @@ namespace WebRepository {
         }
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services) {
-            var connectionString = Configuration.GetConnectionString("Default");
+            var connectionString = Configuration.GetConnectionString("Default2");
             services.AddEntityFeamework(connectionString);
             services.AddControllersWithViews();
+            services.AddMvc(x => x.EnableEndpointRouting = false);
+
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if (env.IsDevelopment()) {
@@ -29,6 +31,13 @@ namespace WebRepository {
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                  name: "areas",
+                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(
                     name: "default",
