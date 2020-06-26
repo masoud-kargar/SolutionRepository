@@ -1,4 +1,5 @@
 ﻿@inject SignInManager<IdentityUser> SignInManager
+@inject IAuthorizationService AuthorizationService
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,34 +46,34 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="CategoryArea" asp-controller="Categories" asp-action="SubIndex">دسته بندس</a>
                         </li>
-                        @*}
-        @if (User.IsInRole("Owner") || User.IsInRole("Admin") && User.HasClaim(ClaimTypeStpre.UserList, true.ToString())) {*@
+                        }
+                       @if (User.IsInRole("Owner") || User.IsInRole("Admin") && User.HasClaim(ClaimTypeStpre.UserList, true.ToString())) {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="IdentityArea" asp-controller="ManageUser" asp-action="Index">مدریت کاربران</a>
                         </li>
-                        @*}
-        @if (User.IsInRole("Owner") || User.IsInRole("Admin") && User.HasClaim(ClaimTypeStpre.RoleList, true.ToString())) {*@
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="IdentityArea" asp-controller="ManageRole" asp-action="Index">مدریت رول ها</a>
-                        </li>
-                        @* } *@
-                    </ul>
+                        }
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "ClaimsAdmin")).Succeeded) {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="IdentityArea" asp-controller="ManageRole" asp-action="Index">مدریت رول ها</a>
+                            </li>
+                           }
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+            </nav>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-</body>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+    </body>
 </html>

@@ -24,7 +24,7 @@ namespace WebRepository.Areas.ClaimsArea.Controllers {
             _RoleManager = roleManager;
         }
 
-        //[Authorize(Policy = "ClaimsAddPolicy")]
+        [Authorize(Policy = "ClaimsAdmin")]
         [HttpGet]
         public async Task<IActionResult> AddUserToClaim(string id) {
             if (ModelState.IsValid) {
@@ -41,7 +41,7 @@ namespace WebRepository.Areas.ClaimsArea.Controllers {
             return View();
         }
 
-        //[Authorize(Policy = "ClaimsAddPolicy")]
+        [Authorize(Policy = "ClaimsAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUserToClaim(A_R_ClaimsViewModel model) {
@@ -59,7 +59,7 @@ namespace WebRepository.Areas.ClaimsArea.Controllers {
             return View();
         }
 
-        [Authorize(Policy = "ClaimsDeletePolicy")]
+        [Authorize(Policy = "ClaimsAdmin")]
         [HttpGet]
         public async Task<IActionResult> RemoveUserFromClaim(string id) {
             if (ModelState.IsValid) {
@@ -75,7 +75,7 @@ namespace WebRepository.Areas.ClaimsArea.Controllers {
             return View();
         }
 
-        [Authorize(Policy = "ClaimsDeletePolicy")]
+        [Authorize(Policy = "ClaimsAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveUserFromClaim(A_R_ClaimsViewModel model) {
