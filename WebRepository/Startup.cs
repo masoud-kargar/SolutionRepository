@@ -1,11 +1,10 @@
+using AllServises;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-using WebRepository.Utility;
 
 namespace WebRepository {
     public class Startup {
@@ -21,6 +20,7 @@ namespace WebRepository {
             services.GetAddClaims();
             services.AddControllersWithViews();
             services.AddMvc(x => x.EnableEndpointRouting = false);
+
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if (env.IsDevelopment()) { app.UseDeveloperExceptionPage(); } else { app.UseExceptionHandler("/Home/Error"); app.UseHsts(); }

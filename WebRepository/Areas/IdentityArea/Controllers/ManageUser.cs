@@ -22,7 +22,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             _roleManager = roleManager;
         }
 
-        //[Authorize(Policy = "UserListPolicy")]
+        [Authorize(Policy = "UserListPolicy")]
         [HttpGet]
         public IActionResult Index() {
             var model = _userManager.Users
@@ -30,7 +30,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(model);
         }
 
-        //[Authorize(Policy = "UserAddPolicy")]
+        [Authorize(Policy = "UserAddPolicy")]
         [HttpGet]
         public async Task<IActionResult> AddUserToRole(string id) {
             if (string.IsNullOrEmpty(id)) return NotFound();
@@ -44,7 +44,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(model);
         }
 
-        //[Authorize(Policy = "UserAddPolicy")]
+        [Authorize(Policy = "UserAddPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUserToRole(AddUserToRoleViewModel model) {

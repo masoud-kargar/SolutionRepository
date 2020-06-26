@@ -4,7 +4,6 @@ using AllInterfaces;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using AllServises;
 using AllInterfaces.Interface;
 using AllServises.Services;
 using Microsoft.AspNetCore.Identity;
@@ -13,12 +12,13 @@ using PersianTranslation.Identity;
 using Microsoft.AspNetCore.Authorization;
 using AllServises.Claims;
 
-namespace WebRepository.Utility {
+namespace AllServises {
     public static class EFExtensions {
         public static IServiceCollection AddEntityFeamework(this IServiceCollection services, string connectionString) {
-            services.AddDbContext<PanelContext>(options => options.UseSqlServer(connectionString, x => x.MigrationsAssembly(nameof(WebRepository))));
+            services.AddDbContext<PanelContext>(options => options.UseSqlServer(connectionString, x => x.MigrationsAssembly(nameof(AllServises))));
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IAuthorizationHandler), typeof(ClaimHandler));
             services.AddScoped<IMessageSender, MessageSender>();
             services.AddIdentity<IdentityUser, IdentityRole>(p => {
                 p.User.RequireUniqueEmail = true;
@@ -29,7 +29,7 @@ namespace WebRepository.Utility {
             return services;
         }
         public static IServiceCollection GetAddClaims(this IServiceCollection services) {
-            services.AddAuthorization(p => {
+            services.AddAuthorizationCore(p => {
                 //Role
                 p.AddPolicy("RoleListPolicy", policy => policy.RequireClaim(ClaimTypeStpre.RoleList, true.ToString()));
                 p.AddPolicy("RoleAddPolicy", policy => policy.RequireClaim(ClaimTypeStpre.RoleAdd, true.ToString()));
@@ -65,7 +65,7 @@ namespace WebRepository.Utility {
 
                 // Claim Mix
                 p.AddPolicy("ClaimsAdmin", policy => policy.RequireAssertion(ClaimsOrRole));
-
+                p.AddPolicy("claimRequirement", policy => policy.Requirements.Add(new ClaimRequirement(ClaimTypeStpre.ClaimsAdd,true.ToString())));
             });
             return services;
         }

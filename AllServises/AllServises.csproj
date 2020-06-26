@@ -5,8 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj" />
     <ProjectReference Include="..\IGenericRepository\AllInterfaces.csproj" />
+    <ProjectReference Include="..\PersianTranslation\PersianTranslation.csproj" />
   </ItemGroup>
 
 </Project>

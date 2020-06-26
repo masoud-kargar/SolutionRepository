@@ -74,7 +74,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
 
             return View(role);
         }
-      
+
         [Authorize(Policy = "RoleDeletePolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
