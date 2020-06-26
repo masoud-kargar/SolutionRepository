@@ -8,4 +8,8 @@
     <Folder Include="Interface\Claims\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ModelLayer\ModelLayer.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -11,14 +11,16 @@ using System;
 using PersianTranslation.Identity;
 using Microsoft.AspNetCore.Authorization;
 using AllServises.Claims;
+using AllServises.Add;
 
 namespace AllServises {
     public static class EFExtensions {
         public static IServiceCollection AddEntityFeamework(this IServiceCollection services, string connectionString) {
-            services.AddDbContext<PanelContext>(options => options.UseSqlServer(connectionString, x => x.MigrationsAssembly(nameof(AllServises))));
+            services.AddDbContext<PanelContext>(options => options.UseSqlServer(connectionString, x => x.MigrationsAssembly("WebRepository")));
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IAuthorizationHandler), typeof(ClaimHandler));
+            services.AddScoped(typeof(IUtilities), typeof(Utilities));
             services.AddScoped<IMessageSender, MessageSender>();
             services.AddIdentity<IdentityUser, IdentityRole>(p => {
                 p.User.RequireUniqueEmail = true;

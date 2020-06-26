@@ -16,19 +16,19 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             _roleManager = roleManager;
         }
 
-        [Authorize(Policy = "RoleListPolicy")]
+        //[Authorize(Policy = "RoleListPolicy")]
         public IActionResult Index() {
             var roles = _roleManager.Roles.ToList();
             return View(roles);
         }
 
-        [Authorize(Policy = "RoleAddPolicy")]
+        //[Authorize(Policy = "RoleAddPolicy")]
         [HttpGet]
         public IActionResult AddRole() {
             return View();
         }
 
-        [Authorize(Policy = "RoleAddPolicy")]
+        //[Authorize(Policy = "RoleAddPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddRole(string name) {
@@ -44,7 +44,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(role);
         }
 
-        [Authorize(Policy = "RoleEditPolicy")]
+        //[Authorize(Policy = "RoleEditPolicy")]
         [HttpGet]
         public async Task<IActionResult> EditRole(string id) {
             if (string.IsNullOrEmpty(id)) return NotFound();
@@ -56,7 +56,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(role);
         }
 
-        [Authorize(Policy = "RoleEditPolicy")]
+        //[Authorize(Policy = "RoleEditPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditRole(string id, string name) {
@@ -75,7 +75,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(role);
         }
 
-        [Authorize(Policy = "RoleDeletePolicy")]
+        //[Authorize(Policy = "RoleDeletePolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteRole(string id) {

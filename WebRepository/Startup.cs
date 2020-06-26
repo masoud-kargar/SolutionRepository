@@ -1,3 +1,4 @@
+
 using AllServises;
 
 using Microsoft.AspNetCore.Builder;
@@ -20,6 +21,7 @@ namespace WebRepository {
             services.GetAddClaims();
             services.AddControllersWithViews();
             services.AddMvc(x => x.EnableEndpointRouting = false);
+            services.AddMemoryCache();
 
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
@@ -32,6 +34,7 @@ namespace WebRepository {
             app.UseAuthorization();
 
             //Areas
+            app.UseEndpoints(endpoints => { endpoints.MapControllerRoute(name: "SiteSettingArea", pattern: "{area:exists}/{controller=SiteSetting}/{action=Index}/{id?}"); });
             app.UseEndpoints(endpoints => { endpoints.MapControllerRoute(name: "IdentityArea", pattern: "{area:exists}/{controller=ManageRole}/{action=Index}/{id?}"); });
             app.UseEndpoints(endpoints => { endpoints.MapControllerRoute(name: "IdentityArea", pattern: "{area:exists}/{controller=ManageUser}/{action=Index}/{id?}"); });
             app.UseEndpoints(endpoints => { endpoints.MapControllerRoute(name: "CategoryArea", pattern: "{area:exists}/{controller=Categories}/{action=Index}/{id?}"); });

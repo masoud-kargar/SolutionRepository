@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 
-using AllServises.Claims;
 
 using ModelLayer.ViewModelLayer.Claims;
 
@@ -10,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using AllServises.Claims;
 
 namespace WebRepository.Areas.ClaimsArea.Controllers {
     [Area("ClaimsArea")]
@@ -24,7 +24,7 @@ namespace WebRepository.Areas.ClaimsArea.Controllers {
             _RoleManager = roleManager;
         }
 
-        [Authorize(Policy = "claimRequirement")]
+        //[Authorize(Policy = "claimRequirement")]
         [HttpGet]
         public async Task<IActionResult> AddUserToClaim(string id) {
             if (ModelState.IsValid) {
@@ -41,7 +41,7 @@ namespace WebRepository.Areas.ClaimsArea.Controllers {
             return View();
         }
 
-        [Authorize(Policy = "claimRequirement")]
+        //[Authorize(Policy = "claimRequirement")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUserToClaim(A_R_ClaimsViewModel model) {
@@ -59,7 +59,7 @@ namespace WebRepository.Areas.ClaimsArea.Controllers {
             return View();
         }
 
-        [Authorize(Policy = "claimRequirement")]
+        //[Authorize(Policy = "claimRequirement")]
         [HttpGet]
         public async Task<IActionResult> RemoveUserFromClaim(string id) {
             if (ModelState.IsValid) {
@@ -75,7 +75,7 @@ namespace WebRepository.Areas.ClaimsArea.Controllers {
             return View();
         }
 
-        [Authorize(Policy = "claimRequirement")]
+        //[Authorize(Policy = "claimRequirement")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveUserFromClaim(A_R_ClaimsViewModel model) {

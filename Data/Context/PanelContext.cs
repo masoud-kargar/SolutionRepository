@@ -1,6 +1,5 @@
 ﻿using Domain;
 
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +16,8 @@ namespace Data {
         public DbSet<BlogNew> BlogNews { get; set; }
         public DbSet<PageComment> PageComments { get; set; }
         public DbContextOptions<PanelContext> Options { get; }
-       
+        public DbSet<Setting> SiteSettings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

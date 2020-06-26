@@ -22,7 +22,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             _roleManager = roleManager;
         }
 
-        [Authorize(Policy = "UserListPolicy")]
+        //[Authorize(Policy = "UserListPolicy")]
         [HttpGet]
         public IActionResult Index() {
             var model = _userManager.Users
@@ -30,7 +30,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(model);
         }
 
-        [Authorize(Policy = "UserAddPolicy")]
+        //[Authorize(Policy = "UserAddPolicy")]
         [HttpGet]
         public async Task<IActionResult> AddUserToRole(string id) {
             if (string.IsNullOrEmpty(id)) return NotFound();
@@ -44,7 +44,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(model);
         }
 
-        [Authorize(Policy = "UserAddPolicy")]
+        //[Authorize(Policy = "UserAddPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUserToRole(AddUserToRoleViewModel model) {
@@ -65,7 +65,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(model);
         }
 
-        [Authorize(Policy = "UserEditPolicy")]
+        //[Authorize(Policy = "UserEditPolicy")]
         [HttpGet]
         public async Task<IActionResult> EditUser(string id) {
             if (string.IsNullOrEmpty(id)) return NotFound();
@@ -75,7 +75,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(user);
         }
 
-        [Authorize(Policy = "UserEditPolicy")]
+        //[Authorize(Policy = "UserEditPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditUser(string id, string userName) {
@@ -94,7 +94,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(user);
         }
 
-        [Authorize(Policy = "UserDeletePolicy")]
+        //[Authorize(Policy = "UserDeletePolicy")]
         [HttpGet]
         public async Task<IActionResult> RemoveUserFromRole(string id) {
             if (string.IsNullOrEmpty(id)) return NotFound();
@@ -106,7 +106,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(model);
         }
 
-        [Authorize(Policy = "UserDeletePolicy")]
+        //[Authorize(Policy = "UserDeletePolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveUserFromRole(AddUserToRoleViewModel model) {
@@ -127,7 +127,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(model);
         }
 
-        [Authorize(Policy = "UserDeletePolicy")]
+        //[Authorize(Policy = "UserDeletePolicy")]
         [HttpGet]
         public async Task<IActionResult> DeleteUser(string id) {
             if (string.IsNullOrEmpty(id)) return NotFound();
@@ -136,7 +136,7 @@ namespace WebRepository.Areas.IdentityArea.Controllers {
             return View(GetId);
         }
 
-        [Authorize(Policy = "UserDeletePolicy")]
+        //[Authorize(Policy = "UserDeletePolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("DeleteUser")]
