@@ -1,4 +1,4 @@
-﻿using IGenericRepository;
+﻿using AllInterfaces;
 
 using System;
 

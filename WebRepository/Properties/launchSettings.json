@@ -1,9 +1,13 @@
 {
   "iisSettings": {
     "windowsAuthentication": false,
-    "anonymousAuthentication": true,
+    "anonymousAuthentication": false,
+    "iis": {
+      "applicationUrl": "http://localhost/WebRepository",
+      "sslPort": 0
+    },
     "iisExpress": {
-      "applicationUrl": "http://localhost:1394",
+      "applicationUrl": "https://localhost:44384/",
       "sslPort": 44384
     }
   },
@@ -14,7 +18,9 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
-      }
+      },
+      "sqlDebugging": false,
+      "nativeDebugging": false
     },
     "WebRepository": {
       "commandName": "Project",
@@ -31,6 +37,10 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
       "useSSL": true
+    },
+    "Azure Dev Spaces": {
+      "commandName": "AzureDevSpaces",
+      "launchBrowser": true
     }
   }
 }

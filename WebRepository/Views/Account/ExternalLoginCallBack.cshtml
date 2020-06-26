@@ -1,0 +1,19 @@
+﻿    
+@{
+    ViewData["Title"] = "ExternalLoginCallBack";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ExternalLoginCallBack</h1>
+<div class="container">
+    <div>
+        <img src="~/404-monitor-mask-4k-as.jpg" alt="Alternate Text" style="width:100%;height:100%" />
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <h1>
+                @ViewBag.ErrorTitle
+                @ViewBag.ErrorMessage
+            </h1>
+        }
+    </div>
+</div>

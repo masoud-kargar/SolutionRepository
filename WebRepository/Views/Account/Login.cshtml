@@ -1,0 +1,71 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "ورود به حساب";
+}
+<div class="row">
+    <h4 class="float-right p-2">ورود به حساب</h4>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4 text-center">
+        <form asp-action="Login" asp-route-data="@ViewData["returnUrl"]" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewData["ErrorMessage"] != null) {<div>@ViewData["Message"]</div>}
+            <div class="form-group">
+                <input asp-for="UserName" class="form-control border-info text-info text-break" placeholder="نام کاربری" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Email" class="form-control border-info text-info text-break" placeholder="ایمیل" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" class="form-control border-info text-info text-break" placeholder="رمز عبور" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check p-3 text-right">
+                <label class="form-check-label pl-3" asp-for="RememberMe"></label>
+                <input class="form-check-input border-info text-info text-break" asp-for="RememberMe" />
+            </div>
+            <div class="row">
+                <input type="submit" value="ورود" class="btn btn-block btn-group-vertical btn-outline-primary " />
+                <a class="float-right btn btn-block btn-outline-info" asp-controller="Account" asp-action="Register">ساخت حساب جدید</a>
+                <a class="float-right btn btn-block btn-outline-warning" asp-controller="Account" asp-action="Register">فراموشی رمز عبور</a>
+            </div>
+        </form>
+        <div class="row mb-3">
+            <div class="col-4">
+                _________________
+            </div>
+            <div class="col-4 text-center p-3">
+                @{
+                    if (!Model.ExternalLogin.Any()) {
+                        <div>در حال حاضر امکان ورود با اکانت های دیگر وجود ندارد</div>
+                    } else {
+                        <form method="post" asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+                            <div class="social">
+                                @foreach (var provider in Model.ExternalLogin) {
+                                    <button type="submit" value="@provider.Name"
+                                            class="btn btn-outline-dark  table-hover btn-block" name="provider"
+                                            title="ورود با استفاده از اکانت @provider.DisplayName ">
+                                        @provider.DisplayName
+                                    </button>
+
+                                }
+                            </div>
+                        </form>
+                    }
+                }
+            </div>
+            <div class="col-4">
+                ___________________
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

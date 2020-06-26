@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace IGenericRepository {
+namespace AllInterfaces {
     public interface IRepository<T> where T : class ,IEntity{
         Task Add(T entity);
         Task Add(IEnumerable<T> entities);

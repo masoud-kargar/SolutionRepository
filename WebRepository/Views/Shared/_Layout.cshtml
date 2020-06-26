@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<IdentityUser> SignInManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebRepository</title>
+    <title>@ViewData["Title"] - CodingElites.ir</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/icons-1.0.0-alpha/docs/static/assets/css/bootstrap.css" rel="stylesheet" />
@@ -12,11 +13,26 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 bg-dark">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebRepository</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <ul class="navbar-nav flex-grow-1">
+                    @if (SignInManager.IsSignedIn(User)) {
+                        <li class="nav-item">
+                            <form asp-controller="Account" asp-action="LogOut" method="post">
+                                <button type="submit" class="btn btn-outline-danger text-dark">خروج</button>
+                            </form>
+                        </li>
+                    } else {
+                        <li class="nav-item pl-5">
+                            <a class="btn btn-outline-success" asp-area="" asp-controller="Account" asp-action="Register"> ساخت اکانت</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="btn btn-outline-dark" asp-area="" asp-controller="Account" asp-action="Login">ورود به اکانت</a>
+                        </li>
+                    }
+                </ul>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
@@ -25,9 +41,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @*@if (User.IsInRole("Owner") || User.IsInRole("Admin") && User.HasClaim(ClaimTypeStpre.CategoryList, true.ToString())) {*@
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="CategoryArea" asp-controller="Categories" asp-action="Index">Area</a>
+                            <a class="nav-link text-dark" asp-area="CategoryArea" asp-controller="Categories" asp-action="SubIndex">دسته بندس</a>
                         </li>
+                        @*}
+        @if (User.IsInRole("Owner") || User.IsInRole("Admin") && User.HasClaim(ClaimTypeStpre.UserList, true.ToString())) {*@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="IdentityArea" asp-controller="ManageUser" asp-action="Index">مدریت کاربران</a>
+                        </li>
+                        @*}
+        @if (User.IsInRole("Owner") || User.IsInRole("Admin") && User.HasClaim(ClaimTypeStpre.RoleList, true.ToString())) {*@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="IdentityArea" asp-controller="ManageRole" asp-action="Index">مدریت رول ها</a>
+                        </li>
+                        @* } *@
                     </ul>
                 </div>
             </div>
@@ -39,11 +67,6 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - WebRepository - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

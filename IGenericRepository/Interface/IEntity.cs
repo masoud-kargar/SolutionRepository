@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IGenericRepository {
+namespace AllInterfaces {
     public interface IEntity {
         public Guid Id { get; set; }
     }

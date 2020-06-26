@@ -1,0 +1,39 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "ساخت حساب";
+}
+<div class="row">
+    <h4 class="float-right p-2">ساخت حساب جدید</h4>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4 text-center">
+        <form asp-action="Register" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group " >
+                <input asp-for="UserName" class="form-control border-info text-info text-break"  placeholder="نام کاربری"/>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Email" class="form-control border-info text-info text-break" placeholder="ایمیل" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" class="form-control border-info text-info text-break"  placeholder="رمز عبور"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="ConfirmPassword" class="form-control border-info text-info text-break"  placeholder="تکرار رمز عبور " />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ثبت" class="btn btn-outline-primary" />
+                <a class="btn btn-outline-info float-right" asp-controller="Account" asp-action="Login">از قبل حساب دارم</a>
+            </div>
+        </form>
+    </div>
+</div>  
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

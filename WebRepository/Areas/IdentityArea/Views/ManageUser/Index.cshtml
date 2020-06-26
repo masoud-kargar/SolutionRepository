@@ -1,0 +1,44 @@
+﻿@model List<IndexViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (!Model.Any()) {
+    <h1>کاربری یافت نشد</h1>
+} else {
+    for (int i = 0; i < Model.Count; i++) {
+        <div class="card mt-2">
+            <div class="card-header">
+                User Name : <b>@Model[i].UserName</b>
+            </div>
+            <div class="card-body">
+                User Email : <b>@Model[i].Email</b>
+            </div>
+            <div class="card-footer container-fluid">
+                <form asp-area="IdentityArea" asp-controller="ManageUser" asp-action="DeleteUser" asp-route-id="@Model[i].Id" method="post">
+                    <div class="row">
+                        <div class="col-4">
+                            <a asp-area="IdentityArea" asp-controller="ManageUser" asp-action="EditUser" asp-route-id="@Model[i].Id"
+                               class="btn btn-block btn-outline-warning">Edit Username</a>
+                            <button type="submit" class="btn btn-block btn-danger">Delete user</button>
+                        </div>
+                        <div class="col-4">
+                            <a asp-area="IdentityArea" asp-controller="ManageUser" asp-action="AddUserToRole" asp-route-id="@Model[i].Id"
+                               class="btn btn-block btn-primary">Add to role</a>
+                            <a asp-area="IdentityArea" -controller="ManageUser" asp-action="RemoveUserFromRole" asp-route-id="@Model[i].Id"
+                               class="btn btn-block btn-danger">Remove From role</a>
+                        </div>
+                        <div class="col-4">
+                            <a asp-area="ClaimsArea" asp-controller="Claims" asp-action="AddUserToClaim" asp-route-id="@Model[i].Id"
+                               class="btn btn-block btn-outline-primary">Add to Claim</a>
+                            <a asp-area="ClaimsArea" asp-controller="Claims" asp-action="RemoveUserFromClaim" asp-route-id="@Model[i].Id"
+                               class="btn btn-block btn-outline-danger">Remove From Claim</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+}

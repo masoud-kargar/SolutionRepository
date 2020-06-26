@@ -1,0 +1,33 @@
+﻿@model List<IdentityRole>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-6">
+    <div class=" col-3">
+        <a class="btn btn-block text-capitalize btn-outline-primary" href="@Url.Action("AddRole","ManageRole",new { area = "IdentityArea"})">ایجاد مقام جدید</a>
+    </div>
+    @if (!Model.Any()) {
+        <h1>مقامی یافت نشد</h1>
+    } else {
+        for (int i = 0; i < Model.Count; i++) {
+            <div class="card mt-2">
+                <div class="card-body">
+                    <b>@Model[i].Name</b>: نام مقام
+                </div>
+                <div class="card-footer">
+                    <form asp-area="IdentityArea" asp-controller="ManageRole" asp-action="DeleteRole" method="post" asp-route-id="@Model[i].Id">
+                        <a asp-area="IdentityArea" asp-controller="ManageRole" asp-action="EditRole" asp-route-id="@Model[i].Id"
+                           class="btn btn-outline-warning">ویرایش</a>
+                        <button type="submit" class="btn btn-outline-danger">حذف</button>
+                    </form>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -13,7 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
@@ -21,18 +24,25 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.11" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="System.Management" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AllServises\AllServises.csproj" />
     <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\IGenericRepository\AllInterfaces.csproj" />
+    <ProjectReference Include="..\ModelLayer\ModelLayer.csproj" />
+    <ProjectReference Include="..\PersianTranslation\PersianTranslation.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\CategoryArea\Data\" />
-    <Folder Include="Areas\CategoryArea\Models\" />
+    <Folder Include="Areas\CatrgoryArea\Data\" />
+    <Folder Include="Areas\CatrgoryArea\Models\" />
+    <Folder Include="Areas\CatrgoryArea\Views\" />
   </ItemGroup>
 
 </Project>
